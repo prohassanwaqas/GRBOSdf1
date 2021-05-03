@@ -1,16 +1,26 @@
-'%matplotlib inline'
+import matplotlib
+
+'''%matplotlib inline'''  # this is used in IPYTHON with jupyter notebook, thats why its not working with regualr python
 
 import numpy as np
 
 import glob
 import pandas as pd
 
-import Leap, ctypes, os, sys
+import Leap
+import ctypes
+import os
+import sys
 import pickle
 
-from leap_data_helper import *
-
+# from leap_data_helper import *
 import matplotlib.pyplot as plt
+
+'''
+Leap.resample('M').sum().plot(kind="bar") #########
+plt.show() ##################
+'''
+
 
 #####################################################
 
@@ -19,13 +29,15 @@ def load_data(data_files, n_disgard=50):
     data_file_names.sort()
     return data_file_names[n_disgard:]
 
+
 #####################################################
 
 person_id = 'p_0'
 gesture_id = 'd'
 num_disgard = 50
 
-frame_leap_names = load_data('./'+person_id+'/'+gesture_id+'/leap_frames/*.data', num_disgard )
+frame_leap_names = load_data('./' + person_id + '/' + gesture_id + '/leap_frames/*.data', num_disgard)
+
 
 ######################################################
 
@@ -151,6 +163,7 @@ def get_angles(frame):
 
     return np.array(angles)
 
+
 ######################################################
 
 person_id_list = ['p_0', 'p_1', 'p_2', 'p_3', 'p_4']
@@ -168,7 +181,6 @@ controller = Leap.Controller()
 for person_id_i, person_id in enumerate(person_id_list):
     for gesture_i, gesture_id in enumerate(gesture_id_list):
 
-
         frame_leap_names = load_data('./' + person_id + '/' + gesture_id + '/leap_frames/*.data')
 
         # extract the angle features
@@ -176,12 +188,19 @@ for person_id_i, person_id in enumerate(person_id_list):
             frame = get_frame(frame_name)
             features_angles_list.append(get_angles(frame))
 
-print ((person_id + ': ' + gesture_id + [person_id_i, gesture_i]))
+#print ((person_id + ': ' + gesture_id + ' has {} samples, label: {}').format(len(img_leap_l_names), [person_id_i, gesture_i]) )
 
+
+#print ((person_id + ':' + gesture_id + 'has {} samples, label: {}')[person_id_i, gesture_i])
+
+
+#print(person_id + ':' + gesture_id + 'has {} samples, label: {}').format([person_id_i, gesture_i])
+
+print((person_id + ": " + gesture_id + "has {} samples, label: {}").format(person_id_i, gesture_i))
 ######################################################
 
 # Save a dictionary into a pickle file.
-pickle.dump( {'features_angles': np.array(features_angles_list),
-              'labels': np.array(label_list)} ,  open( "./datasets/dataset.p", "wb" ),)
+pickle.dump({'features_angles': np.array(features_angles_list),
+             'labels': np.array(label_list)}, open("./datasets/dataset.p", "wb"), )
 
 ######################################################
