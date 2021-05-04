@@ -201,6 +201,7 @@ print((person_id + ": " + gesture_id + "has {} samples, label: {}").format(perso
 
 # Save a dictionary into a pickle file.
 pickle.dump({'features_angles': np.array(features_angles_list),
-             'labels': np.array(label_list)}, open("./datasets/dataset.p", "wb"), )
+            # 'labels': np.array(label_list)}, open("./datasets/dataset.p", "wb"), )
+              'labels': np.array(label_list)}, open("C:\Users\hassan\PycharmProjects\GRBOSdf1\dataset\dataset.p", "wb"), )
 
 ######################################################
