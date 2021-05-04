@@ -16,10 +16,10 @@ import pickle
 # from leap_data_helper import *
 import matplotlib.pyplot as plt
 
-'''
-Leap.resample('M').sum().plot(kind="bar") #########
+'''Leap.resample('M').sum().plot(kind="bar") #########
 plt.show() ##################
 '''
+
 
 
 #####################################################
@@ -196,12 +196,14 @@ for person_id_i, person_id in enumerate(person_id_list):
 
 #print(person_id + ':' + gesture_id + 'has {} samples, label: {}').format([person_id_i, gesture_i])
 
-print((person_id + ": " + gesture_id + "has {} samples, label: {}").format(person_id_i, gesture_i))
+print((person_id + ": " + gesture_id + "has {} samples, label: {}").format(person_id, gesture_id))
 ######################################################
 
 # Save a dictionary into a pickle file.
 pickle.dump({'features_angles': np.array(features_angles_list),
             # 'labels': np.array(label_list)}, open("./datasets/dataset.p", "wb"), )
-              'labels': np.array(label_list)}, open("C:\Users\hassan\PycharmProjects\GRBOSdf1\dataset\dataset.p", "wb"), )
+            'labels': np.array(label_list)}, open("C:\Users\hassan\PycharmProjects\GRBOSdf1\dataset\dataset.p", "wb"),)
 
 ######################################################
+
+#object = pd.read_pickle(r'C:\Users\hassan\PycharmProjects\GRBOSdf1\dataset\dataset.p')
